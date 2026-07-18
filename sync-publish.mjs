@@ -18,6 +18,16 @@ const VAULT =
 
 const OUT = join(import.meta.dirname, "content")
 
+/**
+ * Ban ghi de noi dung cong khai — song trong repo web, KHONG dung vault.
+ *
+ * Note trong vault van la nguon quyet dinh CO duoc publish hay khong (phai
+ * co `publish: true`). Neu overrides/<ten-file-vault>.md ton tai, noi dung
+ * web se lay tu day thay vi copy nguyen vault — dung khi ban muon viet lai
+ * van phong cong khai (bo wikilink, callout...) ma khong sua note goc.
+ */
+const OVERRIDES = join(import.meta.dirname, "overrides")
+
 /** Thu muc KHONG BAO GIO duoc publish, ke ca khi note ben trong gan publish: true. */
 const DENY_DIRS = [
   "1.CAPTURE",
@@ -128,13 +138,21 @@ async function main() {
   const files = await walk(VAULT)
   const mdFiles = files.filter((f) => extname(f) === ".md")
 
-  // 1. Loc note co publish: true
+  // 1. Loc note co publish: true — day la CUA QUYET DINH duy nhat, khong the bi override qua mat
   const published = []
   for (const f of mdFiles) {
-    const text = await readFile(f, "utf8")
+    const vaultText = await readFile(f, "utf8")
+    const vaultFm = splitFrontmatter(vaultText)
+    if (!vaultFm || !isPublished(vaultFm.raw)) continue
+
+    const overridePath = join(OVERRIDES, basename(f))
+    const text = existsSync(overridePath) ? await readFile(overridePath, "utf8") : vaultText
     const fm = splitFrontmatter(text)
-    if (!fm || !isPublished(fm.raw)) continue
-    published.push({ path: f, text, body: fm.body })
+    if (!fm) {
+      console.log(`⚠ Bo qua "${basename(f)}": override thieu frontmatter hop le.`)
+      continue
+    }
+    published.push({ path: f, text, body: fm.body, overridden: text !== vaultText })
   }
 
   if (published.length === 0) {
@@ -222,7 +240,10 @@ async function main() {
 
   // 7. Bao cao
   console.log(`\n✓ Da dua ${published.length} note + ${assetCount} asset vao content/`)
-  for (const slug of taken.keys()) console.log(`  · ${slug}`)
+  for (const slug of taken.keys()) {
+    const overridden = published.find((n) => slugOf(n.path) === slug)?.overridden
+    console.log(`  · ${slug}${overridden ? "  (dang dung ban override)" : ""}`)
+  }
 
   if (collisions.length) {
     console.log(`\n✗ TRUNG TEN FILE (${collisions.length}) — chi note dau tien duoc dung:`)
