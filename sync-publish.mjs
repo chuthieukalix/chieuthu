@@ -159,7 +159,29 @@ async function main() {
     }
   }
 
-  // 6. Bao cao
+  // 6. Sinh trang chu: phan gioi thieu tu trang-chu.md + danh sach bai tu dong
+  const introPath = join(import.meta.dirname, "trang-chu.md")
+  const intro = existsSync(introPath)
+    ? await readFile(introPath, "utf8")
+    : "---\ntitle: Chu Thiều\n---\n"
+
+  const entries = published
+    .filter((n) => taken.get(slugOf(n.path)) === n.path) // bo qua ban trung ten
+    .map((n) => {
+      const fm = splitFrontmatter(n.text).raw
+      const title = fm.match(/^title:\s*(.+)$/m)?.[1].trim().replace(/^["']|["']$/g, "")
+      const date = fm.match(/^(?:created|updated):\s*(\d{4}-\d{2}-\d{2})/m)?.[1] ?? ""
+      return { name: basename(n.path, ".md"), title: title || basename(n.path, ".md"), date }
+    })
+    .sort((a, b) => b.date.localeCompare(a.date))
+
+  const list = entries.length
+    ? entries.map((e) => `- [[${e.name}|${e.title}]]${e.date ? ` — *${e.date}*` : ""}`).join("\n")
+    : "*Chưa có bài nào.*"
+
+  await writeFile(join(OUT, "index.md"), `${intro.trimEnd()}\n\n## Bài viết\n\n${list}\n`)
+
+  // 7. Bao cao
   console.log(`\n✓ Da dua ${published.length} note + ${assetCount} asset vao content/`)
   for (const slug of taken.keys()) console.log(`  · ${slug}`)
 
