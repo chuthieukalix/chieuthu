@@ -15,7 +15,8 @@ created: 2026-06-30
 
 ![[tia-lua-cat-sat.jpg]]
 
-Người chụp giỏi không "đóng băng chuyển động" — họ gieo đủ manh mối để người xem tự dựng lại chuyển động trong đầu. Máy ảnh đưa ra thông tin để dẫn dắt, não người xem sẽ tiếp nhận thông tin và nó tự động nối lại để phán đoán sự kiện tiếp theo.
+> [!camera] Mở đầu vấn đề
+> Người chụp giỏi không "đóng băng chuyển động" — họ gieo đủ manh mối để người xem tự dựng lại chuyển động trong đầu. Máy ảnh đưa ra thông tin để dẫn dắt, não người xem sẽ tiếp nhận thông tin và nó tự động nối lại để phán đoán sự kiện tiếp theo.
 
 Một nghịch lý mở đầu: bức ảnh này đứng yên tuyệt đối. Mọi tia lửa bị ghim cứng giữa không trung. Vậy mà nó lại là khung hình "động" nhất ta có thể chụp được. Chuyển động trong ảnh, hóa ra, không nằm ở vật lý. Nó nằm ở chỗ não người xem tự nối lại.
 
@@ -48,4 +49,5 @@ Chọn đóng băng hay nhòe thoạt nghe là câu kỹ thuật, nhưng thật 
 
 Cái "đáng" nằm ở đó. Chuyển động được tạo ra không phải để khoe kỹ thuật, mà để nâng một công việc lao động bình thường trở nên đáng quý. Đây là cạnh Tâm lý & Triết. Đúng như câu nói sắc: "decisive moment" của Cartier-Bresson — ảnh chuyển động chưa bao giờ chỉ là mẹo canh đúng giây; nó là một khoảnh khắc được bất tử hoá.
 
-Bức ảnh tia lửa đứng yên tuyệt đối, mà động nhất, vì nó đưa ra hàng trăm chữ ký đang chờ được nối. Người chụp không đóng băng chuyển động. Họ gieo manh mối (vệt, hướng, đường chéo, đúng đỉnh hành động) để người xem tự dựng lại nó.
+> [!camera] Kết Luận
+> Bức ảnh tia lửa đứng yên tuyệt đối, mà động nhất, vì nó đưa ra hàng trăm chữ ký đang chờ được nối. Người chụp không đóng băng chuyển động. Họ gieo manh mối (vệt, hướng, đường chéo, đúng đỉnh hành động) để người xem tự dựng lại nó.
