@@ -14,8 +14,10 @@
   }
 }
 
-// Khung anh — mat trong 32px + vien ngoai walnut 16px — ap dung cho anh trong noi dung bai viet
-article img {
+// Khung anh — mat trong 32px + vien ngoai walnut 16px.
+// Chi ap dung cho bai gan tag "nhiep-anh" — bai chuyen muc khac (Kalix, business...)
+// anh hien tron, khong bi ep phong cach nay.
+body:has(a.tag-link[href$="/tags/nhiep-anh"]) article img {
   box-sizing: border-box;
   padding: 32px;
   background-color: #ebe3d5;
