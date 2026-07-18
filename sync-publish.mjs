@@ -62,6 +62,45 @@ const isPublished = (fm) => /^publish:\s*true\s*$/im.test(fm)
 /** Lay ten file dich (flatten) — vault dung wikilink bare [[basename]]. */
 const slugOf = (path) => basename(path)
 
+/** Xap xi cach Quartz bien ten thanh URL slug: thuong hoa, khoang trang -> gach ngang. */
+const toSlug = (s) => s.trim().toLowerCase().replaceAll(" ", "-")
+
+/**
+ * Bo alias trung voi chinh slug cua note.
+ *
+ * Plugin alias-redirects sinh mot trang chuyen huong cho moi alias. Neu alias
+ * trung ten note, trang chuyen huong de len trang that va tro ve chinh no
+ * -> trinh duyet lap vo han, man hinh trang tron.
+ */
+function stripSelfAlias(text, selfSlug) {
+  const fm = splitFrontmatter(text)
+  if (!fm) return text
+
+  const lines = fm.raw.split("\n")
+  const i = lines.findIndex((l) => /^aliases:/.test(l))
+  if (i === -1) return text
+
+  const inline = lines[i].match(/^aliases:\s*\[(.*)\]\s*$/)
+  if (inline) {
+    const kept = inline[1]
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .filter((a) => toSlug(a.replace(/^["']|["']$/g, "")) !== selfSlug)
+    lines[i] = `aliases: [${kept.join(", ")}]`
+  } else {
+    // Dang khoi:  aliases:\n  - A\n  - B
+    let end = i + 1
+    while (end < lines.length && /^\s*-\s+/.test(lines[end])) end++
+    const kept = lines
+      .slice(i + 1, end)
+      .filter((l) => toSlug(l.replace(/^\s*-\s+/, "").replace(/^["']|["']$/g, "")) !== selfSlug)
+    lines.splice(i + 1, end - i - 1, ...kept)
+  }
+
+  return `---${lines.join("\n")}\n---\n${fm.body}`
+}
+
 /** Tim moi asset duoc nhung trong note: ![[x.png]] va ![](x.png) */
 function findAssets(body) {
   const out = new Set()
@@ -121,7 +160,7 @@ async function main() {
     }
     taken.set(slug, note.path)
     publishedSlugs.add(basename(slug, ".md"))
-    await copyFile(note.path, join(OUT, slug))
+    await writeFile(join(OUT, slug), stripSelfAlias(note.text, toSlug(basename(slug, ".md"))))
   }
 
   // 4. Copy asset duoc nhung trong cac note da publish

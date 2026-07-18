@@ -1,7 +1,6 @@
 ---
 publish: true
 aliases:
-  - Tạo chuyển động trong bức ảnh
   - Chuyển động trong ảnh tĩnh
   - Motion in a still photograph
 tags:
