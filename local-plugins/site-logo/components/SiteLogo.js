@@ -34,7 +34,7 @@ SiteLogo.css = `
   align-items: center;
 }
 .site-logo-img {
-  height: 1.15rem;
+  height: 0.92rem;
   width: auto;
   display: block;
 }

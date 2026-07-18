@@ -14,12 +14,30 @@
   }
 }
 
-// Khung anh — mat trong 32px + vien ngoai walnut 8px — ap dung cho anh trong noi dung bai viet
+// Khung anh — mat trong 32px + vien ngoai walnut 16px — ap dung cho anh trong noi dung bai viet
 article img {
   box-sizing: border-box;
   padding: 32px;
   background-color: #ebe3d5;
-  border: 8px solid #31241a;
+  border: 16px solid #31241a;
   border-radius: 2px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+// Trang co banner: banner tran len tan dinh trang, header noi len tren voi
+// nen trong suot 80%. Chi anh huong trang co .post-banner — trang khac giu nguyen.
+.page-header:has(.post-banner) {
+  margin-top: 0;
+  position: relative;
+
+  > header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    margin: 0;
+    padding: 1.75rem 2rem;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
 }
