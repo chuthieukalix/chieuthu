@@ -99,6 +99,10 @@ plugins:
     order: 92
   - source: github:quartz-community/fonts
     enabled: true
+    options:
+      header: Courier Prime
+      body: Courier Prime
+      code: Courier Prime
   - source: github:quartz-community/remove-draft
     enabled: true
   - source: github:quartz-community/explicit-publish

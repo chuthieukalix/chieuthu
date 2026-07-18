@@ -2,6 +2,50 @@
 
 // put your custom CSS here!
 
+// Font Courier New tu host — file that (.ttf) do nguoi dung cung cap, khong qua Google Fonts.
+@font-face {
+  font-family: "Courier New";
+  src: url("/static/fonts/courier-new-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Courier New";
+  src: url("/static/fonts/courier-new-bold-italic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+// Ep hien thi bang Courier New that (tu host) thay vi Courier Prime (Google Fonts).
+// Giu Courier Prime lam du phong: neu vi ly do gi Courier New khong tai duoc, trang
+// van hien font monospace gan giong thay vi roi ve serif/sans mac dinh trinh duyet.
+// Font nay nam ngoai @layer nen luon thang cascade so voi CSS goc cua Quartz.
+:root {
+  --titleFont:
+    "Courier New", "Courier Prime", monospace;
+  --headerFont:
+    "Courier New", "Courier Prime", monospace;
+  --bodyFont:
+    "Courier New", "Courier Prime", monospace;
+  --codeFont:
+    "Courier New", "Courier Prime", monospace;
+}
+
+// Mot so plugin (fonts, quartz-themes neu vo tinh duoc cai) sinh rule truc
+// tiep h1..h6 { font-family: <literal> }, khong qua bien --headerFont, va co
+// the nap sau custom.scss tuy che do build. !important de khong phu thuoc
+// thu tu nap file.
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Courier New", "Courier Prime", monospace !important;
+}
+
 // Callout tuy bien: icon may anh, mau vang mua thu — dung [!camera] trong markdown
 .callout {
   --callout-icon-camera: url('data:image/svg+xml; utf8, <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>');
