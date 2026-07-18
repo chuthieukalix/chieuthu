@@ -1,6 +1,7 @@
 ---
 title: Tạo chuyển động trong bức ảnh
 publish: true
+slug: chuyen-dong-trong-anh
 tags:
   - viet-lach
   - essay

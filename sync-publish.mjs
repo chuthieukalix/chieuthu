@@ -69,8 +69,17 @@ function splitFrontmatter(text) {
 
 const isPublished = (fm) => /^publish:\s*true\s*$/im.test(fm)
 
-/** Lay ten file dich (flatten) — vault dung wikilink bare [[basename]]. */
-const slugOf = (path) => basename(path)
+/**
+ * Rut gon URL: neu note co `slug:` trong frontmatter, dung gia tri do lam ten
+ * file dau ra thay vi ten file goc (thuong dai, co dau, xau khi ma hoa URL).
+ * Khong co `slug:` -> giu nguyen ten file nhu cu.
+ */
+function customOutName(fm, fallback) {
+  const m = fm.raw.match(/^slug:\s*(.+)$/m)
+  if (!m) return fallback
+  const raw = m[1].trim().replace(/^["']|["']$/g, "")
+  return raw ? `${raw}.md` : fallback
+}
 
 /** Xap xi cach Quartz bien ten thanh URL slug: thuong hoa, khoang trang -> gach ngang. */
 const toSlug = (s) => s.trim().toLowerCase().replaceAll(" ", "-")
@@ -181,7 +190,14 @@ async function main() {
       continue
     }
     const finalText = withAutoBanner(text, fm)
-    published.push({ path: f, text: finalText, body: fm.body, overridden: text !== vaultText })
+    const outName = customOutName(fm, basename(f))
+    published.push({
+      path: f,
+      text: finalText,
+      body: fm.body,
+      overridden: text !== vaultText,
+      outName,
+    })
   }
 
   if (published.length === 0) {
@@ -200,12 +216,15 @@ async function main() {
   const collisions = []
 
   for (const note of published) {
-    const slug = slugOf(note.path)
+    const slug = note.outName
     if (taken.has(slug)) {
       collisions.push({ slug, a: taken.get(slug), b: note.path })
       continue
     }
     taken.set(slug, note.path)
+    // Ca ten file goc va slug rut gon deu duoc coi la "da publish" — wikilink
+    // trong vault tro theo ten file goc van phai khop dung.
+    publishedSlugs.add(basename(note.path, ".md"))
     publishedSlugs.add(basename(slug, ".md"))
     await writeFile(join(OUT, slug), stripSelfAlias(note.text, toSlug(basename(slug, ".md"))))
   }
@@ -252,12 +271,16 @@ async function main() {
     : "---\ntitle: Chu Thiều\n---\n"
 
   const entries = published
-    .filter((n) => taken.get(slugOf(n.path)) === n.path) // bo qua ban trung ten
+    .filter((n) => taken.get(n.outName) === n.path) // bo qua ban trung ten
     .map((n) => {
       const fm = splitFrontmatter(n.text).raw
       const title = fm.match(/^title:\s*(.+)$/m)?.[1].trim().replace(/^["']|["']$/g, "")
-      const date = fm.match(/^(?:created|updated):\s*(\d{4}-\d{2}-\d{2})/m)?.[1] ?? ""
-      return { name: basename(n.path, ".md"), title: title || basename(n.path, ".md"), date }
+      const name = basename(n.outName, ".md")
+      return {
+        name,
+        title: title || name,
+        date: fm.match(/^(?:created|updated):\s*(\d{4}-\d{2}-\d{2})/m)?.[1] ?? "",
+      }
     })
     .sort((a, b) => b.date.localeCompare(a.date))
 
@@ -270,8 +293,9 @@ async function main() {
   // 7. Bao cao
   console.log(`\n✓ Da dua ${published.length} note + ${assetCount} asset vao content/`)
   for (const slug of taken.keys()) {
-    const overridden = published.find((n) => slugOf(n.path) === slug)?.overridden
-    console.log(`  · ${slug}${overridden ? "  (dang dung ban override)" : ""}`)
+    const note = published.find((n) => n.outName === slug)
+    const short = slug !== basename(note?.path ?? slug) ? "  (URL rut gon)" : ""
+    console.log(`  · ${slug}${note?.overridden ? "  (dang dung ban override)" : ""}${short}`)
   }
 
   if (collisions.length) {

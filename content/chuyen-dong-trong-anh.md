@@ -2,6 +2,7 @@
 banner: tia-lua-cat-sat.jpg
 title: Tạo chuyển động trong bức ảnh
 publish: true
+slug: chuyen-dong-trong-anh
 tags:
   - viet-lach
   - essay

@@ -9,4 +9,4 @@ Ghi chép về nhiếp ảnh, viết lách, và cách làm việc.
 
 ## Bài viết
 
-- [[Tạo chuyển động trong bức ảnh|Tạo chuyển động trong bức ảnh]] — *2026-06-30*
+- [[chuyen-dong-trong-anh|Tạo chuyển động trong bức ảnh]] — *2026-06-30*
