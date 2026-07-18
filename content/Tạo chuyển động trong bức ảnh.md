@@ -17,6 +17,8 @@ framework: "[[Tam Giác Tối Thiểu]]"
 
 *— đọc qua tia lửa của người thợ cắt sắt*
 
+![[tia-lua-cat-sat.jpg]]
+
 > [!abstract] Một câu
 > Người chụp giỏi không "đóng băng chuyển động" — họ **gieo đủ manh mối** để người xem tự dựng lại chuyển động trong đầu. Chuyển động trong ảnh tĩnh là một **bản hợp đồng**: máy ảnh đưa ra vết, não người xem ký vào bằng cách nối lại.
 
