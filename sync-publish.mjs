@@ -128,6 +128,28 @@ function findAssets(text) {
   return [...out].filter((p) => IMAGE_EXT.has(extname(p).toLowerCase()))
 }
 
+/** Tim anh dau tien xuat hien trong body (theo dung thu tu trong text), bo qua URL ngoai. */
+function findFirstImage(body) {
+  const re = /!\[\[([^\]|#]+)(?:[|#][^\]]*)?\]\]|!\[[^\]]*\]\(([^)\s]+)\)/g
+  for (const m of body.matchAll(re)) {
+    const ref = m[1] ? m[1].trim() : decodeURIComponent(m[2].trim())
+    if (ref.startsWith("http")) continue
+    if (IMAGE_EXT.has(extname(ref).toLowerCase())) return ref
+  }
+  return null
+}
+
+/**
+ * Tu dong gan `banner:` = anh dau tien trong body, neu note chua tu khai bao
+ * banner rieng. Frontmatter co san `banner:` luon duoc uu tien, khong bi ghi de.
+ */
+function withAutoBanner(text, fm) {
+  if (/^banner:\s*.+$/m.test(fm.raw)) return text
+  const firstImg = findFirstImage(fm.body)
+  if (!firstImg) return text
+  return text.replace(/^---\n/, `---\nbanner: ${firstImg}\n`)
+}
+
 /** Liet ke wikilink tro sang note khac (de canh bao link gay). */
 function findWikilinks(body) {
   const out = new Set()
@@ -158,7 +180,8 @@ async function main() {
       console.log(`⚠ Bo qua "${basename(f)}": override thieu frontmatter hop le.`)
       continue
     }
-    published.push({ path: f, text, body: fm.body, overridden: text !== vaultText })
+    const finalText = withAutoBanner(text, fm)
+    published.push({ path: f, text: finalText, body: fm.body, overridden: text !== vaultText })
   }
 
   if (published.length === 0) {

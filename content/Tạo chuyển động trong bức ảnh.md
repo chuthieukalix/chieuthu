@@ -1,7 +1,7 @@
 ---
+banner: tia-lua-cat-sat.jpg
 title: Tạo chuyển động trong bức ảnh
 publish: true
-banner: tia-lua-cat-sat.jpg
 tags:
   - viet-lach
   - essay
@@ -11,6 +11,8 @@ created: 2026-06-30
 ---
 
 *— đọc qua tia lửa của người thợ cắt sắt*
+
+![[tia-lua-cat-sat.jpg]]
 
 > [!camera] Mở đầu vấn đề
 > Người chụp giỏi không "đóng băng chuyển động" — họ gieo đủ manh mối để người xem tự dựng lại chuyển động trong đầu. Máy ảnh đưa ra thông tin để dẫn dắt, não người xem sẽ tiếp nhận thông tin và nó tự động nối lại để phán đoán sự kiện tiếp theo.
