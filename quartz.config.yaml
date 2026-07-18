@@ -15,9 +15,9 @@ configuration:
     fontOrigin: googleFonts
     cdnCaching: true
     typography:
-      header: Schibsted Grotesk
-      body: Source Sans Pro
-      code: IBM Plex Mono
+      header: Courier Prime
+      body: Courier Prime
+      code: Courier Prime
     colors:
       lightMode:
         light: "#faf8f8"
