@@ -13,3 +13,17 @@
     --callout-icon: var(--callout-icon-camera);
   }
 }
+
+// Khung anh go nau, vien trang — ap dung cho anh trong noi dung bai viet
+article img {
+  box-sizing: border-box;
+  padding: 14px;
+  background-color: #fffdf8;
+  border: 14px solid #6b4226;
+  border-image: linear-gradient(160deg, #8a5c34 0%, #5c3820 50%, #7a4d2b 100%) 14;
+  border-radius: 2px;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.5),
+    inset 0 0 0 3px rgba(0, 0, 0, 0.15);
+}

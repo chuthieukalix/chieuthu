@@ -24,20 +24,20 @@ configuration:
         lightgray: "#e5e5e5"
         gray: "#b8b8b8"
         darkgray: "#4e4e4e"
-        dark: "#2b2b2b"
-        secondary: "#284b63"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
+        dark: "#8a5c1a"
+        secondary: "#b8791e"
+        tertiary: "#d9a441"
+        highlight: rgba(201, 137, 31, 0.15)
         textHighlight: "#fff23688"
       darkMode:
         light: "#161618"
         lightgray: "#393639"
         gray: "#646464"
         darkgray: "#d4d4d4"
-        dark: "#ebebec"
-        secondary: "#7b97aa"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
+        dark: "#e8c27a"
+        secondary: "#d9a441"
+        tertiary: "#f0c869"
+        highlight: rgba(201, 137, 31, 0.15)
         textHighlight: "#b3aa0288"
 plugins:
   - source: github:quartz-community/created-modified-date
@@ -163,6 +163,11 @@ plugins:
       position: beforeBody
       priority: 30
   - source: github:quartz-community/page-title
+    enabled: false
+    layout:
+      position: left
+      priority: 10
+  - source: ./local-plugins/site-logo
     enabled: true
     layout:
       position: left
@@ -179,6 +184,12 @@ plugins:
       position: left
       priority: 35
       group: toolbar
+  - source: ./local-plugins/post-banner
+    enabled: true
+    layout:
+      position: beforeBody
+      priority: 1
+      condition: not-index
   - source: github:quartz-community/breadcrumbs
     enabled: true
     layout:

@@ -1,0 +1,22 @@
+{
+  "name": "post-banner",
+  "type": "module",
+  "quartz": {
+    "name": "post-banner",
+    "displayName": "Post Banner",
+    "category": "component",
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [],
+    "defaultOrder": 50,
+    "defaultEnabled": true,
+    "defaultOptions": {},
+    "components": {
+      "PostBanner": {
+        "displayName": "Post Banner",
+        "defaultPosition": "beforeBody",
+        "defaultPriority": 1
+      }
+    }
+  }
+}

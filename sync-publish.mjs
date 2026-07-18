@@ -111,14 +111,20 @@ function stripSelfAlias(text, selfSlug) {
   return `---${lines.join("\n")}\n---\n${fm.body}`
 }
 
-/** Tim moi asset duoc nhung trong note: ![[x.png]] va ![](x.png) */
-function findAssets(body) {
+/**
+ * Tim moi asset duoc tham chieu trong note: ![[x.png]], ![](x.png), va
+ * frontmatter `banner: x.jpg` (anh banner khong nhung trong body, chi khai
+ * bao qua frontmatter).
+ */
+function findAssets(text) {
   const out = new Set()
-  for (const m of body.matchAll(/!\[\[([^\]|#]+)(?:[|#][^\]]*)?\]\]/g)) out.add(m[1].trim())
-  for (const m of body.matchAll(/!\[[^\]]*\]\(([^)\s]+)\)/g)) {
+  for (const m of text.matchAll(/!\[\[([^\]|#]+)(?:[|#][^\]]*)?\]\]/g)) out.add(m[1].trim())
+  for (const m of text.matchAll(/!\[[^\]]*\]\(([^)\s]+)\)/g)) {
     const p = decodeURIComponent(m[1].trim())
     if (!p.startsWith("http")) out.add(p)
   }
+  const banner = text.match(/^banner:\s*(.+)$/m)
+  if (banner) out.add(banner[1].trim().replace(/^["']|["']$/g, ""))
   return [...out].filter((p) => IMAGE_EXT.has(extname(p).toLowerCase()))
 }
 
@@ -190,7 +196,7 @@ async function main() {
   let assetCount = 0
   const missingAssets = []
   for (const note of published) {
-    for (const ref of findAssets(note.body)) {
+    for (const ref of findAssets(note.text)) {
       const name = basename(ref)
       const src = assetIndex.get(name)
       if (!src) {

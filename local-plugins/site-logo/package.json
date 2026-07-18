@@ -1,0 +1,22 @@
+{
+  "name": "site-logo",
+  "type": "module",
+  "quartz": {
+    "name": "site-logo",
+    "displayName": "Site Logo",
+    "category": "component",
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [],
+    "defaultOrder": 50,
+    "defaultEnabled": true,
+    "defaultOptions": {},
+    "components": {
+      "SiteLogo": {
+        "displayName": "Site Logo",
+        "defaultPosition": "left",
+        "defaultPriority": 10
+      }
+    }
+  }
+}
