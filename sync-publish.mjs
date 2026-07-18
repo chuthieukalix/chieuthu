@@ -105,6 +105,8 @@ async function main() {
   // 2. Don sach content/ roi ghi lai tu dau (tranh sot note da go co)
   await rm(OUT, { recursive: true, force: true })
   await mkdir(OUT, { recursive: true })
+  // Giu thu muc ton tai trong git ngay ca khi chua co bai nao — CI can no de build
+  await writeFile(join(OUT, ".gitkeep"), "")
 
   // 3. Copy note, phat hien trung ten
   const taken = new Map()
