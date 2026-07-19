@@ -2,35 +2,15 @@
 
 // put your custom CSS here!
 
-// Font Courier New tu host — file that (.ttf) do nguoi dung cung cap, khong qua Google Fonts.
-@font-face {
-  font-family: "Courier New";
-  src: url("/static/fonts/courier-new-regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Courier New";
-  src: url("/static/fonts/courier-new-bold-italic.ttf") format("truetype");
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
-// Ep hien thi bang Courier New that (tu host) thay vi Courier Prime (Google Fonts).
-// Giu Courier Prime lam du phong: neu vi ly do gi Courier New khong tai duoc, trang
-// van hien font monospace gan giong thay vi roi ve serif/sans mac dinh trinh duyet.
-// Font nay nam ngoai @layer nen luon thang cascade so voi CSS goc cua Quartz.
+// Courier New that (font Monotype cua he dieu hanh) THIEU glyph cho nhieu dau
+// thanh tieng Viet (dau nang, mot so to hop dau) — chu bi rot dau khi hien
+// thi. Da bo, chi dung Courier Prime (Google Fonts, ho tro day du Unicode
+// tieng Viet, hinh dang gan giong Courier New).
 :root {
-  --titleFont:
-    "Courier New", "Courier Prime", monospace;
-  --headerFont:
-    "Courier New", "Courier Prime", monospace;
-  --bodyFont:
-    "Courier New", "Courier Prime", monospace;
-  --codeFont:
-    "Courier New", "Courier Prime", monospace;
+  --titleFont: "Courier Prime", monospace;
+  --headerFont: "Courier Prime", monospace;
+  --bodyFont: "Courier Prime", monospace;
+  --codeFont: "Courier Prime", monospace;
 }
 
 // Mot so plugin (fonts, quartz-themes neu vo tinh duoc cai) sinh rule truc
@@ -43,7 +23,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Courier New", "Courier Prime", monospace !important;
+  font-family: "Courier Prime", monospace !important;
 }
 
 // Callout tuy bien: icon may anh, mau vang mua thu — dung [!camera] trong markdown
@@ -67,7 +47,6 @@ body:has(a.tag-link[href$="/tags/nhiep-anh"]) article img {
   background-color: #ebe3d5;
   border: 16px solid #31241a;
   border-radius: 2px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
 // Trang co banner: banner tran len tan dinh trang, header noi len tren voi
