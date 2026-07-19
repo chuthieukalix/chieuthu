@@ -2,15 +2,14 @@
 
 // put your custom CSS here!
 
-// Courier New that (font Monotype cua he dieu hanh) THIEU glyph cho nhieu dau
-// thanh tieng Viet (dau nang, mot so to hop dau) — chu bi rot dau khi hien
-// thi. Da bo, chi dung Courier Prime (Google Fonts, ho tro day du Unicode
-// tieng Viet, hinh dang gan giong Courier New).
+// Cap font "Photographic": Playfair Display (tieu de, serif tuong phan cao,
+// chat editorial) + Lora (noi dung, serif de doc). Ca hai deu ho tro day du
+// Unicode tieng Viet tren Google Fonts.
 :root {
-  --titleFont: "Courier Prime", monospace;
-  --headerFont: "Courier Prime", monospace;
-  --bodyFont: "Courier Prime", monospace;
-  --codeFont: "Courier Prime", monospace;
+  --titleFont: "Playfair Display", serif;
+  --headerFont: "Playfair Display", serif;
+  --bodyFont: "Lora", serif;
+  --codeFont: "IBM Plex Mono", monospace;
 }
 
 // Mot so plugin (fonts, quartz-themes neu vo tinh duoc cai) sinh rule truc
@@ -23,7 +22,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Courier Prime", monospace !important;
+  font-family: "Playfair Display", serif !important;
 }
 
 // Callout tuy bien: icon may anh, mau vang mua thu — dung [!camera] trong markdown

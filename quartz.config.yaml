@@ -15,9 +15,9 @@ configuration:
     fontOrigin: googleFonts
     cdnCaching: true
     typography:
-      header: Courier Prime
-      body: Courier Prime
-      code: Courier Prime
+      header: Playfair Display
+      body: Lora
+      code: IBM Plex Mono
     colors:
       lightMode:
         light: "#faf8f8"
@@ -100,9 +100,9 @@ plugins:
   - source: github:quartz-community/fonts
     enabled: true
     options:
-      header: Courier Prime
-      body: Courier Prime
-      code: Courier Prime
+      header: Playfair Display
+      body: Lora
+      code: IBM Plex Mono
   - source: github:quartz-community/remove-draft
     enabled: true
   - source: github:quartz-community/explicit-publish
